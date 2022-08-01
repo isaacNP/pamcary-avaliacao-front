@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS  } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -40,7 +41,8 @@ export const MY_DATE_FORMATS = {
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MomentDateModule
+    MomentDateModule,
+    MatPaginatorModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},

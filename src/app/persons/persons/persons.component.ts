@@ -23,14 +23,12 @@ export class PersonsComponent implements OnInit {
 
   constructor(
     private personsService: PersonsService,
-    private _snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
     private service: PersonsService,
-    private snackBar: MatSnackBar,
-    private location: Location
+    private snackBar: MatSnackBar
   ) {
-    this.persons$ = this.personsService.findAll()
+    this.persons$ = this.personsService.findAll(0, 100)
     .pipe(
       catchError(error => {
         this.onError('Erro ao listar registros');

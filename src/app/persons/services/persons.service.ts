@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { first, map } from 'rxjs';
 
@@ -13,8 +13,12 @@ export class PersonsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findAll() {
-    return this.httpClient.get<Person[]>(this.API.concat('findAll?page=0&size=10'))
+  findAll(page: number, size: number) {
+    return this.httpClient.get<Person[]>(this.API.concat('findAll'), {
+      params: new HttpParams()
+        .set('page', page)
+        .set('size', size)
+    })
     .pipe(
       first(),
       map((res: any) => {
