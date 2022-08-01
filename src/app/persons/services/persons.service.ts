@@ -40,6 +40,11 @@ export class PersonsService {
     return this.httpClient.get<Person>(url);
   }
 
+  findByCpf(cpf: string) {
+    const url = this.API.concat('findByCpf/') + cpf;
+    return this.httpClient.get<Person[]>(url);
+  }
+
   delete(codigo: number) {
     const url = this.API.concat('deleteById/') + codigo;
     return this.httpClient.delete(url);

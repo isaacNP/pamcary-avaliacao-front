@@ -4,6 +4,12 @@
       <div>
         Pessoas Cadastradas
       </div>
+      <div>
+        <input matInput placeholder="Digite CPF" id="searchCpf" name="searchCpf" #searchCpf>
+        <button matSuffix mat-icon-button (click)="onSearch(searchCpf.value)">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
       <div class="addButton">
         <button mat-mini-fab color="accent" aria-label="Adicionar Pessoa" >
           <mat-icon (click)="onAdd()">add</mat-icon>

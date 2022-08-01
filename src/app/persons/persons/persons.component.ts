@@ -18,6 +18,8 @@ export class PersonsComponent implements OnInit {
   persons$: Observable<Person[]>;
   displayedColumns: string[] = ['nome', 'cpf', 'dataNascimento', 'acoes']
 
+  searchCpf: string = '';
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
@@ -28,13 +30,7 @@ export class PersonsComponent implements OnInit {
     private service: PersonsService,
     private snackBar: MatSnackBar
   ) {
-    this.persons$ = this.personsService.findAll(0, 100)
-    .pipe(
-      catchError(error => {
-        this.onError('Erro ao listar registros');
-        return of([]);
-      })
-      );
+    this.persons$ = this.findAll();
   }
 
   ngOnInit(): void {
@@ -42,6 +38,16 @@ export class PersonsComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  findAll() {
+    return this.personsService.findAll(0, 100)
+    .pipe(
+      catchError(error => {
+        this.onError('Erro ao listar registros');
+        return of([]);
+      })
+      );
   }
 
   onUpdate(codigo: number) {
@@ -59,6 +65,22 @@ export class PersonsComponent implements OnInit {
       duration: 5000,
       panelClass: ['error-snackbar']
     });
+  }
+
+  onSearch(cpf: string) {
+
+    if(cpf.length == 0 ) {
+      this.persons$ = this.findAll()
+    } else {
+      this.persons$ = this.personsService.findByCpf(cpf)
+      .pipe(
+        catchError(error => {
+          this.onError('Erro ao listar registros');
+          return this.findAll();
+        })
+      );
+    }
+
   }
 
 }
