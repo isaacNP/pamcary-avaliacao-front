@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Moment } from 'moment';
 
 import { PersonsService } from './../services/persons.service';
 
@@ -44,20 +45,24 @@ export class PersonFormComponent implements OnInit {
 
   onfindById() {
     this.service.findById(this.codigo).subscribe( response => {
+      var data = response.dataNascimento.split('/');
       this.form.setValue({
         codigo: response.codigo,
         nome: response.nome,
         cpf: response.cpf,
-        dataNascimento: response.dataNascimento
+        dataNascimento: new Date(Number(data[2]), Number(data[1]) - 1, Number(data[0]))
       });
+
+      console.log(this.form);
     })
   }
 
   onSubmit(){
 
-    console.log()
-    var data: Date = this.form.controls['dataNascimento'].value;
-    var formattedDate = data.getDate() + '/' + ((data.getMonth() + 1) < 10 ? ('0' + (data.getMonth() + 1)) : (data.getMonth() + 1)) + '/' + data.getFullYear();
+    //console.log()
+    var data: Moment = this.form.controls['dataNascimento'].value;
+    console.log(data.toLocaleString());
+    var formattedDate = data.date() + '/' + ((data.month() + 1) < 10 ? ('0' + (data.month() + 1)) : (data.month() + 1)) + '/' + data.year();
     //console.log(data?.substring(7,9).concat('/').concat(data?.substring(4,6)).concat('/').concat(data.substring(0,3)));
     this.form.patchValue({dataNascimento: formattedDate})
 
