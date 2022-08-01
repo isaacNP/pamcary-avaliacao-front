@@ -13,3 +13,11 @@ $custom-theme: mat-light-theme($custom-app-primary, $custom-app-secundary, $cust
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.accept-snackbar {
+  background: #04AA6D;
+}
+
+.error-snackbar {
+  background: #ff6f69;
+}

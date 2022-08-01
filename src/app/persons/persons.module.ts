@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { AppMaterialModule } from '../shared/app-material.module';
+import { PersonFormComponent } from './person-form/person-form.component';
 import { PersonsRoutingModule } from './persons-routing.module';
 import { PersonsComponent } from './persons/persons.component';
 
-import { AppMaterialModule } from '../shared/app-material/app-material.module';
-
 @NgModule({
   declarations: [
-    PersonsComponent
+    PersonsComponent,
+    PersonFormComponent
   ],
   imports: [
     CommonModule,
     PersonsRoutingModule,
-    AppMaterialModule
+    AppMaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class PersonsModule { }

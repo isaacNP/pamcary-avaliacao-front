@@ -19,6 +19,22 @@
         <td mat-cell *matCellDef="let person"> {{ person.dataNascimento }} </td>
       </ng-container>
 
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef>
+          <button mat-mini-fab color="accent" aria-label="Adicionar Pessoa">
+            <mat-icon (click)="onAdd()">add</mat-icon>
+          </button>
+        </mat-header-cell>
+        <mat-cell *matCellDef=" let person">
+          <button mat-icon-button color="primary" aria-label="Editar Pessoa">
+            <mat-icon (click)="onUpdate(person.codigo)">edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" aria-label="Remover Pessoa">
+            <mat-icon (click)="onDelete(person.codigo)">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
