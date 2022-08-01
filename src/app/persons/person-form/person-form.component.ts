@@ -34,8 +34,6 @@ export class PersonFormComponent implements OnInit {
 
   ngOnInit(): void {
     console.log();
-    console.log(this.route.snapshot.paramMap.get('codigo'));
-
     this.codigo = Number(this.route.snapshot.paramMap.get('codigo'));
     this.form.patchValue({codigo: this.codigo});
 
@@ -56,6 +54,12 @@ export class PersonFormComponent implements OnInit {
   }
 
   onSubmit(){
+
+    console.log()
+    var data: Date = this.form.controls['dataNascimento'].value;
+    var formattedDate = data.getDate() + '/' + ((data.getMonth() + 1) < 10 ? ('0' + (data.getMonth() + 1)) : (data.getMonth() + 1)) + '/' + data.getFullYear();
+    //console.log(data?.substring(7,9).concat('/').concat(data?.substring(4,6)).concat('/').concat(data.substring(0,3)));
+    this.form.patchValue({dataNascimento: formattedDate})
 
     if(this.location.path().includes('update')) {
       this.service.update(this.form.value)
